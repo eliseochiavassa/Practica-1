@@ -1,22 +1,33 @@
 import random
 
-words = [
-    "python",
-    "programa",
-    "variable",
-    "funcion",
-    "bucle",
-    "cadena",
-    "entero",
-    "lista",
-]
+# Diccionario de categorías
+words = {
+    "programacion": ["python", "variable", "funcion", "bucle"],
+    "general": ["casa", "perro", "auto", "mesa"],
+    "ciencia": ["atomo", "celula", "energia", "masa"]
+}
 
-word = random.choice(words)
+# Mostrar categorias disponibles
+print("Categorías disponibles:")
+for categoria in words:
+    print("-", categoria)
+
+# Elegir categoria
+categoria_elegida = input("Elegí una categoría: ")
+
+# Validar categoría
+while categoria_elegida not in words:
+    print("Categoría no válida")
+    categoria_elegida = input("Elegí una categoría: ")
+
+# Elegir palabra de la categoria
+word = random.choice(words[categoria_elegida])
+
 guessed = []
 attempts = 6
-score = 0  # NUEVO
+score = 0
 
-print("¡Bienvenido al Ahorcado!")
+print("\n¡Bienvenido al Ahorcado!")
 print()
 
 while attempts > 0:
@@ -29,7 +40,7 @@ while attempts > 0:
     print(progress)
 
     if "_" not in progress:
-        score += 6  #  SUMA SI GANA
+        score += 6
         print("¡Ganaste!")
         break
 
@@ -50,13 +61,13 @@ while attempts > 0:
     else:
         guessed.append(letter)
         attempts -= 1
-        score -= 1  #  RESTA SI FALLA
+        score -= 1
         print("Esa letra no está en la palabra.")
 
     print()
 
 else:
-    score = 0  #  SI PIERDE
+    score = 0
     print(f"¡Perdiste! La palabra era: {word}")
 
-print("Puntaje:", score)  # SCORE FINAL
+print("Puntaje:", score)
